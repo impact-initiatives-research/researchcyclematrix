@@ -90,7 +90,9 @@ g_sheets_update_index<-function(col="AR",spreadsheetId="1wX5k3cETrCbnw4vpfY07eSz
     thisurl<-paste0("https://sheets.googleapis.com/v4/spreadsheets/",spreadsheetId,"/values/",range,"?valueInputOption=USER_ENTERED")
 
     value='=IF(ROW()=1,\\"index\\",ROW())'
-    httr::PUT(thisurl,googlesheets:::google_token(),valueInputOption="RAW",
+#Chiara: replace previous version with googlesheets with what I think is the updated googlesheets4 version
+#    httr::PUT(thisurl,googlesheets:::google_token(),valueInputOption="RAW",
+    httr::PUT(thisurl, googlesheets4::sheets_token(), valueInputOption="RAW",
               body=paste0('{
                           "values":[',paste0(paste0('["',rep(value,rows[2]-rows[1]+1),'"]'),collapse=','),']
   }')

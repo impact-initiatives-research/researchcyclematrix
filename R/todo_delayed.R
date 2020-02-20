@@ -96,7 +96,9 @@ todo_delayed_browse<-function(){
 #' open research cycle matrix google sheet in browser
 #' @export
 rcm_browse<-function(){
-  browseURL("https://docs.google.com/spreadsheets/d/1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk/edit#gid=1202281367&fvid=70520525")
+  # Chiara: updating to rcm 2020
+  ##  browseURL("https://docs.google.com/spreadsheets/d/1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk/edit#gid=1202281367&fvid=70520525")
+  browseURL("https://docs.google.com/spreadsheets/d/1OKuX3QtTnrWPNURhIwiJlEMwhhoOebZw/edit#gid=261219097&fvid=70520525")
 }
 
 #' open submission google sheet in browser

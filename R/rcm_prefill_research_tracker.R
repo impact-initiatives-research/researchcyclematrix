@@ -137,7 +137,8 @@ rcm_prefill_research_tracker_create_rows<-function(rcm = NULL){
   rcm$`Date to HQ`[is.na(rcm$`Date to HQ`)]<-rcm$date.hqsubmission.planned.latest[is.na(rcm$`Date to HQ`)]
   rcm$`Date to HQ`[is.na(rcm$`Date to HQ`)]<-rcm$date.hqsubmission.planned.first[is.na(rcm$`Date to HQ`)]
   rcm$`Date to HQ`
-  rcm$`Date to HQ` <- format(rcm$`Date to HQ`,'%d-%b-%Y')
+  # Chiara: reomve format, for some reason is putting everything in 2020??
+  #  rcm$`Date to HQ` <- format(rcm$`Date to HQ`,'%d-%b-%Y')
   rcm$`Round` <- rcm$round
   tracker_rows<-rcm %>% filter(!is.na(file.id) & file.id !="") %>% as_tibble %>% select(
     Country,

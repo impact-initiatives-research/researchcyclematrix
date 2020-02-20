@@ -66,7 +66,8 @@ rcm_issue$dates_missing<-function(rcm){
 rcm_issue$with_hq_but_no_received_date<-function(rcm){which(status_with_hq(rcm) & is.na(rcm$date.hqsubmission.actual))}
 rcm_issue$with_field_but_not_received_date<-function(rcm){which(status_with_field(rcm) & is.na(rcm$date.hqsubmission.actual))}
 rcm_issue$data_unit_no_status<-function(rcm){which(rcm_is_data_unit_item(rcm) & !rcm_has_identified_status(rcm))}
-rcm_issue$passed_planned_not_recieved<-function(rcm){which(rcm_past_planned_submission(rcm) & !(grepl("hq|field|validated|cancelled",tolower(rcm$status))))}
+# Chiara: added partner since was creating issues and wrong messages in the output
+rcm_issue$passed_planned_not_recieved<-function(rcm){which(rcm_past_planned_submission(rcm) & !(grepl("hq|field|validated|cancelled|partner",tolower(rcm$status))))}
 rcm_issue$duplicated_file_id<-function(rcm){which(duplicated(rcm$file.id))}
 rcm_issue$too_long_with_field<-function(rcm){
 

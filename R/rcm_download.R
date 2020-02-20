@@ -28,7 +28,7 @@ rcm_download <- function(include_archived=F,include_validated=F,after_year="2015
   datecols<-grep("[^[:alnum:] ]Date|[^[:alnum:] ]date|File.submission.to.HQ",names(rcm),value=T)
 
   for(i in datecols){
-    rcm[,i] <- as.Date(as.character(rcm[,i])) #Chiara: try to remove specified date format, since we use all different ones -- ,format=dateformat)
+    rcm[,i] <- as.Date(as.character(rcm[,i]),format=dateformat)
   }
 
   after_year<-as.Date(paste0(after_year,"2014-12-31"),format="%Y-%m-%d")

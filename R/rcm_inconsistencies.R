@@ -59,7 +59,7 @@ rcm_issue$dates_missing<-function(rcm){
   which(is.na(rcm$date.hqsubmission.planned.first) &
         is.na(rcm$date.hqsubmission.planned.latest) &
         is.na(rcm$date.hqsubmission.actual) &
-        !grepl('with HQ|validated', rcm$status)
+        !grepl('hq|field|validated|cancelled|partner', tolower(rcm$status))
           )
 }
 

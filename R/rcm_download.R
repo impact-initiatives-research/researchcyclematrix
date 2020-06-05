@@ -17,12 +17,11 @@ rcm_download <- function(include_archived=F,include_validated=F,after_year="2015
   rcm<-read.csv("https://docs.google.com/spreadsheets/d/1OKuX3QtTnrWPNURhIwiJlEMwhhoOebZw/gviz/tq?tqx=out:csv&sheet=RC_Matrix_2020",
                   stringsAsFactors = F)
 
-  rcm
-
-  x<-rcm[1,]
-  if(remove_empty){rcm<-rcm[apply(rcm,1,function(x){
-    x<-x[-which(names(x)=="index")];!all(is.na(x)|x=="")}),]
-  }
+  ##Chiara: comment out this bit, since for some reason causing (only in June 2020) issues -- basically just restricting the output to the first row. Looks like what the code has been doing all along, but this has been the setup all the time, and always worked, so not cancelling, but only commenting out, will try to follow up in the coming period. Just a quick fix
+  #x<-rcm[1,]
+  #if(remove_empty){rcm<-rcm[apply(rcm,1,function(x){
+  #  x<-x[-which(names(x)=="index")];!all(is.na(x)|x=="")}),]
+  #}
   if(raw){
     # message("RCM requested in raw format. ignoring all other parameters.")
     return(rcm)}

@@ -22,7 +22,8 @@ rcm_download <- function(include_archived=F,include_validated=F,after_year="2015
 
   x<-rcm[1,]
   if(remove_empty){rcm<-rcm[apply(rcm,1,function(x){
-    x<-x[-which(names(x)=="index")];!all(is.na(x)|x=="")}),]
+#    x<-x[-which(names(x)=="index")];!all(is.na(x)|x=="")}),]
+     x<-x[-which(names(x)=="Country")];!all(is.na(x)|x=="")}),]
   }
   if(raw){
     # message("RCM requested in raw format. ignoring all other parameters.")

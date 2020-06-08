@@ -17,8 +17,8 @@ rcm_download <- function(include_archived=F,include_validated=F,after_year="2015
   rcm<-read.csv("https://docs.google.com/spreadsheets/d/1OKuX3QtTnrWPNURhIwiJlEMwhhoOebZw/gviz/tq?tqx=out:csv&sheet=RC_Matrix_2020",
                   stringsAsFactors = F)
 
-  ##Chiara: possibly identified the issue as coming from the check on the index below. Use country instead -- note: this should be properly filled -- temporary fix
-  x<-rcm[1,]
+  ##Chiara: commment out this confusing x -
+#  x<-rcm[1,]
   if(remove_empty){rcm<-rcm[apply(rcm,1,function(x){
     x<-x[-which(names(x)=="index")];!all(is.na(x)|x=="")}),]
   }

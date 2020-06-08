@@ -20,8 +20,7 @@ rcm_download <- function(include_archived=F,include_validated=F,after_year="2015
   ##Chiara: possibly identified the issue as coming from the check on the index below. Use country instead -- note: this should be properly filled -- temporary fix
   x<-rcm[1,]
   if(remove_empty){rcm<-rcm[apply(rcm,1,function(x){
-#    x<-x[-which(names(x)=="index")];!all(is.na(x)|x=="")}),]
-     x<-x[-which(names(x)=="Country")];!all(is.na(x)|x=="")}),]
+    x<-x[-which(names(x)=="index")];!all(is.na(x)|x=="")}),]
   }
   if(raw){
     # message("RCM requested in raw format. ignoring all other parameters.")

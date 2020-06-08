@@ -34,7 +34,9 @@ rcm_download <- function(include_archived=F,include_validated=F,after_year="2015
 
   ##Chiara: comment out the check on early cycles, not necessary, since the new RCM is only referred to current RCs, and causes an error
   after_year<-as.Date(paste0(after_year,"2014-12-31"),format="%Y-%m-%d")
-  too_early_entries<-apply(rcm[,datecols],2,function(x){x<after_year}) %>% apply(1,any,na.rm =T)
+  ##chiara change here from %>% apply
+  too_early_entries<-apply(rcm[,datecols],2,function(x){x<after_year})
+  too_early_entries <- apply(too_early_entries, 1,any,na.rm =T)
   rcm<-rcm[!too_early_entries,,drop=F]
 
 

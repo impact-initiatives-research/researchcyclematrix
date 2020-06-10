@@ -25,7 +25,7 @@ rcm_standardised_columns<-function(rcm){
   rcm$status[rcm$Current.status %>% grepl("hq|HQ",.)]<-"with HQ"
 
   rcm$status[rcm$Current.status %>% grepl("not received",.)]<-"not received"
-  rcm$status[rcm$Current.status == ""]<-"1 not received"
+  rcm$status[rcm$Current.status == ""]<-"not received"
 
   rcm$status[rcm$Current.status %>% grepl("partner",.)]<-"with partner"
 

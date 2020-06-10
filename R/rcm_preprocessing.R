@@ -16,15 +16,15 @@ rcm_standardised_columns<-function(rcm){
   rcm$original.status<-rcm$Current.status
   rcm$Current.status<-tolower(rcm$Current.status)
   rcm$status<-rcm$Current.status
-  rcm$status[rcm$Current.status %>% grepl("hold",.)]<-"4 on hold"
+  rcm$status[rcm$Current.status %>% grepl("hold",.)]<-"on hold"
 
-  rcm$status[rcm$Current.status %>% grepl("cancelled",.)]<-"5 cancelled"
+  rcm$status[rcm$Current.status %>% grepl("cancelled",.)]<-"cancelled"
 
-  rcm$status[rcm$Current.status %>% grepl("validated|Validated",.)]<-"3 validated"
+  rcm$status[rcm$Current.status %>% grepl("validated|Validated",.)]<-"validated"
 
-  rcm$status[rcm$Current.status %>% grepl("hq|HQ",.)]<-"2 with HQ"
+  rcm$status[rcm$Current.status %>% grepl("hq|HQ",.)]<-"with HQ"
 
-  rcm$status[rcm$Current.status %>% grepl("not received",.)]<-"1 not received"
+  rcm$status[rcm$Current.status %>% grepl("not received",.)]<-"not received"
   rcm$status[rcm$Current.status == ""]<-"1 not received"
 
   rcm$status[rcm$Current.status %>% grepl("partner",.)]<-"with partner"

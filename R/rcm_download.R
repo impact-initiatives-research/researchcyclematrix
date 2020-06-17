@@ -12,8 +12,12 @@
 #' @export
 rcm_download <- function(include_archived=F,include_validated=F,after_year="2015",main_columns_only=T,fill.dates=T,remove_empty=T,gdrive_links=F,raw=F){
   # print("downloading rcm...")
-  rcm<-read.csv("https://docs.google.com/spreadsheets/d/1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk/gviz/tq?tqx=out:csv&sheet=RC_Matrix_2.1",
-                stringsAsFactors = F)
+  # Chiara: use the current 2020 matrix instead
+  ##  rcm<-read.csv("https://docs.google.com/spreadsheets/d/1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk/gviz/tq?tqx=out:csv&sheet=RC_Matrix_2.1",
+  #Chiara: change the access path of the csv file, since for some reason it stopped understading the proper formatting with this method, and half of the column titles were not seen (those of numeric or date columns)
+  ##  rcm<-read.csv("https://docs.google.com/spreadsheets/d/1OKuX3QtTnrWPNURhIwiJlEMwhhoOebZw/gviz/tq?tqx=out:csv&sheet=RC_Matrix_2020",
+  rcm <- read.csv("https://docs.google.com/spreadsheets/d/1OKuX3QtTnrWPNURhIwiJlEMwhhoOebZw/export?format=csv&sheet=RC_Matrix_2020",
+                   stringsAsFactors = F)
 
   x<-rcm[1,]
   if(remove_empty){rcm<-rcm[apply(rcm,1,function(x){

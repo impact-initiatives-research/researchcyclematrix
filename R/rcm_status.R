@@ -24,6 +24,14 @@ status_with_field<-function(rcm){
   rcm$status %>% grepl("field",.)
 }
 
+#' Chiara: is with partner?
+#' @param rcm the research cycle matrix from rcm_download(raw=F)
+#' @return logical vector
+status_with_partner <- function(rcm){
+
+  rcm$status %>% grepl("partner", .)
+}
+
 #' how long has each item been with HQ?
 #' @param rcm the research cycle matrix from rcm_download(raw=F)
 #' @return Date time difference vector

@@ -27,8 +27,12 @@ rcm_download <- function(include_archived=F,include_validated=F,after_year="2015
     # message("RCM requested in raw format. ignoring all other parameters.")
     return(rcm)}
   dateformat<-"%d-%b-%y"
-  datecols<-grep("[^[:alnum:] ]Date|[^[:alnum:] ]date|File.submission.to.HQ",names(rcm),value=T)
+  ##Chiara: fixed this line to actually format all the date columns as date
+  ##  datecols<-grep("[^[:alnum:] ]Date|[^[:alnum:] ]date|File.submission.to.HQ",names(rcm),value=T)
+  datecols <- grep("Date|date|First.|Most.recent", names(rcm), value = T)
 
+  ##Chiara: add setting for locale to have as.Date properly working for any locale
+  lct <- Sys.getlocale("LC_TIME"); Sys.setlocale("LC_TIME", "C")
   for(i in datecols){
     rcm[,i] <- as.Date(as.character(rcm[,i]),format=dateformat)
   }

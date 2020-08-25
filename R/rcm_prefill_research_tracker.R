@@ -123,7 +123,7 @@ rcm_prefill_research_tracker_create_rows<-function(rcm = NULL){
 
   issues$request[grepl("none of the hq submission dates", issues$issue)]<-"Missing estimated date of submission to HQ, please add in \"Date to HQ\" column"
 
-  issues$request[grepl("planned submission passed", issues$issue)]<-"Estimated date of submission to HQ has passed, please add new estimated date in \"Date to HQb\" column and briefly explain delay in CFP comments"
+  issues$request[grepl("planned submission passed", issues$issue)]<-"Estimated date of submission to HQ has passed, please add new estimated date in \"Date to HQ\" column and briefly explain delay in CFP comments"
 
 
   rcm$`HQ Update Request`<- issues[match(rcm$file.id,issues$`file id`),"request"]
@@ -137,7 +137,8 @@ rcm_prefill_research_tracker_create_rows<-function(rcm = NULL){
   rcm$`Date to HQ`[is.na(rcm$`Date to HQ`)]<-rcm$date.hqsubmission.planned.latest[is.na(rcm$`Date to HQ`)]
   rcm$`Date to HQ`[is.na(rcm$`Date to HQ`)]<-rcm$date.hqsubmission.planned.first[is.na(rcm$`Date to HQ`)]
   rcm$`Date to HQ`
-  rcm$`Date to HQ` <- format(rcm$`Date to HQ`,'%d-%b-%Y')
+  # Chiara: reomve format, for some reason is putting everything in 2020??
+  #  rcm$`Date to HQ` <- format(rcm$`Date to HQ`,'%d-%b-%Y')
   rcm$`Round` <- rcm$round
   tracker_rows<-rcm %>% filter(!is.na(file.id) & file.id !="") %>% as_tibble %>% select(
     Country,

@@ -14,7 +14,7 @@ Suggests:
 Depends: 
     knitr,
     ggplot2,
-    googlesheets,
+    googlesheets4,
     httr,
     magrittr,
     crayon,

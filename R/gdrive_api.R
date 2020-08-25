@@ -19,7 +19,9 @@ rcm_change_value<-function(file.id,column,value){
   row<-get_gdrive_row(file.id)
 
   # now we know the column and the row and the value, now we just need to actually call the api:
-  g_sheets_put(row,column,value,spreadsheetId = "1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk")
+  # Chiara: modify this to use the newest 2020 rcm instead -- point to a different spreadsheetID
+  ## g_sheets_put(row,column,value,spreadsheetId = "1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk")
+  g_sheets_put(row,column,value,spreadsheetId = "1OKuX3QtTnrWPNURhIwiJlEMwhhoOebZw")
 }
 
 
@@ -35,7 +37,9 @@ rcm_change_value<-function(file.id,column,value){
 #' @param value the value to put into the cell
 #' @param spreadsheetId we could use this for other spreadsheets, but it's not working at the moment. Throwing an error if this param is changed
 g_sheets_put<-function(row,col,value,spreadsheetId="1Quu2P6z-uA2H64eQENWJkNIOGIfnsdXgKNg4qdiCvXc",...){
-  if(spreadsheetId!="1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk"){stop("g_sheets_put implemented only for one specific spreadsheet. for other spreadsheets would overwrite column AR")}
+  # Chiara: change the spreadsheetid to be the 2020 rcm -- this code should be changedn imo
+  ## if(spreadsheetId!="1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk")
+  if(spreadsheetId != "1OKuX3QtTnrWPNURhIwiJlEMwhhoOebZw"){stop("g_sheets_put implemented only for one specific spreadsheet. for other spreadsheets would overwrite column AR")}
   cell<-paste0(col,row)
   thisurl<-paste0("https://sheets.googleapis.com/v4/spreadsheets/",spreadsheetId,"/values/",cell,"?valueInputOption=USER_ENTERED")
 
@@ -46,7 +50,9 @@ g_sheets_put<-function(row,col,value,spreadsheetId="1Quu2P6z-uA2H64eQENWJkNIOGIf
   # had issues with this in the past; please be careful when editing and test carefully with json native symbolds in value
 
   # stores the server_response so we can throw an error if it didn't go through
-  server_response <- httr::PUT(thisurl,googlesheets:::google_token(),valueInputOption="RAW",
+  # Chiara: changing forgotten googlesheets to googlesheets4
+  ##  server_response <- httr::PUT(thisurl,googlesheets:::google_token(),valueInputOption="RAW",
+  server_response <- httr::PUT(thisurl,googlesheets4::sheets_token(),valueInputOption="RAW",
                                body=paste0('{
                                            "values":[["',value,'"]]
 }')
@@ -63,7 +69,8 @@ g_sheets_put<-function(row,col,value,spreadsheetId="1Quu2P6z-uA2H64eQENWJkNIOGIf
 g_sheets_append_row<-function(value,spreadsheetId="1iNt__-uMMBTbLEsJkiIXglPJ4GK-9UCVqC7awhMTXF8",...){
   thisurl<-paste0("https://sheets.googleapis.com/v4/spreadsheets/",spreadsheetId,"/values/","submissions!A1:E2:append","?valueInputOption=USER_ENTERED")
   # https://sheets.googleapis.com/v4/spreadsheets/spreadsheetId/values/Sheet1!A1:E1:append?valueInputOption=USER_ENTERED
-  httr::POST(thisurl,googlesheets:::google_token(),valueInputOption="RAW",
+##  httr::POST(thisurl,googlesheets:::google_token(),valueInputOption="RAW",
+  httr::POST(thisurl,googlesheets4::sheets_token(),valueInputOption="RAW",
              body=
 
                # paste0('{
@@ -90,7 +97,9 @@ g_sheets_update_index<-function(col="AR",spreadsheetId="1wX5k3cETrCbnw4vpfY07eSz
     thisurl<-paste0("https://sheets.googleapis.com/v4/spreadsheets/",spreadsheetId,"/values/",range,"?valueInputOption=USER_ENTERED")
 
     value='=IF(ROW()=1,\\"index\\",ROW())'
-    httr::PUT(thisurl,googlesheets:::google_token(),valueInputOption="RAW",
+#Chiara: replace previous version with googlesheets with what I think is the updated googlesheets4 version
+#    httr::PUT(thisurl,googlesheets:::google_token(),valueInputOption="RAW",
+    httr::PUT(thisurl, googlesheets4::sheets_token(), valueInputOption="RAW",
               body=paste0('{
                           "values":[',paste0(paste0('["',rep(value,rows[2]-rows[1]+1),'"]'),collapse=','),']
   }')

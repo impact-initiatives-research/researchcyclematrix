@@ -6,8 +6,10 @@
 gdrive_hyperlink_row<-function(file.id){
   # if(length(file.id)>1){warning("can only link to 1 gdrive row at a time. Using first.")}
   rowid<-get_gdrive_row(file.id)
-  href<-paste0("https://docs.google.com/spreadsheets/d/1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk/edit#gid=1202281367&range=",
-               rowid)
+  # Chiara:modifying this to work with the 2020 rcm
+  ##  href<-paste0("https://docs.google.com/spreadsheets/d/1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk/edit#gid=1202281367&range=",
+  href<-paste0("https://docs.google.com/spreadsheets/d/1OKuX3QtTnrWPNURhIwiJlEMwhhoOebZw/edit#gid=261219097&range=",
+                rowid)
   return(href)
 }
 

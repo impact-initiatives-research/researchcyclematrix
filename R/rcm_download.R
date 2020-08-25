@@ -10,7 +10,8 @@
 #' @param raw logical: if TRUE ignores all other parameters and returns the raw download (default FALSE)
 #' @return a data frame with the research cycle matrix
 #' @export
-rcm_download <- function(include_archived=F,include_validated=F,after_year="2015",main_columns_only=T,fill.dates=T,remove_empty=T,gdrive_links=F,raw=F){
+rcm_download <- function(include_archived=F, include_validated=F, after_year="2015", main_columns_only=T,
+                         fill.dates=T, remove_empty=T, remove_cancelled = F, gdrive_links=F,raw=F){
   # print("downloading rcm...")
   # Chiara: use the current 2020 matrix instead
   ##  rcm<-read.csv("https://docs.google.com/spreadsheets/d/1wX5k3cETrCbnw4vpfY07eSzTyWX6AwmJmxJQwPahrSk/gviz/tq?tqx=out:csv&sheet=RC_Matrix_2.1",
@@ -64,7 +65,9 @@ rcm_download <- function(include_archived=F,include_validated=F,after_year="2015
   if(!include_validated){
     rcm<-rcm[!grepl("validated",rcm$status),]
   }
-
+  if (remove_cancelled) {
+    rcm <- rcm[!grepl("cancelled", rcm$status), ]
+  }
 
   rcm
 

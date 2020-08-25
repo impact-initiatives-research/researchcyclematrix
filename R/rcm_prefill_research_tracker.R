@@ -37,7 +37,7 @@ rcm_prefill_research_tracker<-function(output_xlsx_file_name = paste0("tracker_"
   # get list of all file ids, check inconsistencies with rcm_check and create columns that match the template:
 
   if(is.null(rcm)){
-    rcm<-rcm_download(include_validated = FALSE,include_archived = FALSE,gdrive_links = FALSE, , remove_cancelled = TRUE)
+    rcm<-rcm_download(include_validated = FALSE,include_archived = FALSE,gdrive_links = FALSE, remove_cancelled = TRUE)
   }
 
   if(by_country){

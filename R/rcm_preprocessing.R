@@ -89,6 +89,7 @@ rcm_standardised_columns<-function(rcm){
                  date.feedback = {rcm_renaming_findname("First.round.of.feedback.submitted.to.field..of.last.file.if.several")},
                  date.validated = {rcm_renaming_findname("Date.published...archived")},
                  rcid={rcm_renaming_findname("Research.Cycle.ID")},
+                 round={rcm_renaming_findname("month...round...batch")},
                  date.milestone = {rcm_renaming_findname("Milestone.date")},
                  file.id = {rcm_renaming_findname("File.ID_Name")},
                  type={rcm_renaming_findname("File.type")},

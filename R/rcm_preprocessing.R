@@ -87,7 +87,7 @@ rcm_standardised_columns<-function(rcm){
                  date.hqsubmission.planned.latest = {rcm_renaming_findname("File.submission.to.HQ...Latest.planned.date..of.last.file.if.several")},
                  date.hqsubmission.actual = {rcm_renaming_findname("File.submission.to.HQ...Actual.date.received..of.last.file.if.several")},
                  date.feedback = {rcm_renaming_findname("First.round.of.feedback.submitted.to.field..of.last.file.if.several")},
-                 date.validated = {rcm_renaming_findname("Date.publshed...archived")},
+                 date.validated = {rcm_renaming_findname("Date.published...archived")},
                  rcid={rcm_renaming_findname("Research.Cycle.ID")},
                  round={rcm_renaming_findname("month...round...batch")},
                  date.milestone = {rcm_renaming_findname("Milestone.date")},

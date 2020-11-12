@@ -53,7 +53,7 @@ rcm_download <- function(include_archived=F, include_validated=F, after_year="20
     main_cols<-c("rcid","round","file.id","type",
                  "date.endcollection.planned","date.endcollection.actual",
                  "date.hqsubmission.planned.first","date.hqsubmission.planned.latest", "date.hqsubmission.actual",
-                 "date.feedback","date.validated","date.milestone",
+                 "date.feedback", "date.recent.feedback","date.validated","date.milestone",
                  "status","archived","unit","comment","rc.title","project.code","hq.fp")
     if(gdrive_links){main_cols<-c(main_cols,"link")}
     rcm<-rcm[,main_cols]

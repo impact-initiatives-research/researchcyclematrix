@@ -17,7 +17,7 @@ rcm_check<-function(rcm,check.archived=F,check.validated=F){
     # rcm_find_issue(rcm,rcm_issue$with_field_but_not_received_date, issue_name = "no received date but with field"),
     rcm_find_issue(rcm,rcm_issue$data_unit_no_status, issue_name = "data unit item with non-standardisable status"),
     rcm_find_issue(rcm,rcm_issue$duplicated_file_id, issue_name = "file-id-name not unique"),
-    rcm_find_issue(rcm,rcm_issue$too_long_with_field, issue_name = "with field longer than expected")
+    rcm_find_issue(rcm,rcm_issue$too_long_with_field, issue_name = "with field for more than a month, any status update?")
   )
 
 
@@ -70,9 +70,9 @@ rcm_issue$data_unit_no_status<-function(rcm){which(rcm_is_data_unit_item(rcm) & 
 rcm_issue$passed_planned_not_recieved<-function(rcm){which(rcm_past_planned_submission(rcm) & !(grepl("hq|field|validated|cancelled|partner",tolower(rcm$status))))}
 rcm_issue$duplicated_file_id<-function(rcm){which(duplicated(rcm$file.id))}
 rcm_issue$too_long_with_field<-function(rcm){
-
-
-
+  most_recent_feedback <- pmax(rcm$date.feedback, rcm$date.recent.feedback, na.rm = T)
+  which(rcm$status %in% c("with field", "with partner") &
+        ((lubridate::today() - most_recent_feedback) > 30))
 }
 
 

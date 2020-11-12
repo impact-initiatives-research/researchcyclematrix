@@ -45,6 +45,7 @@ rcm_prefill_research_tracker<-function(output_xlsx_file_name = paste0("tracker_"
     # split the rcm into a list of smaller rcms:
 
     rcm_by_country<- split.data.frame(rcm,rcm$country)
+    print(rcm_by_country)
     output_xlsx_file_name<-gsub("\\.xlsx$","",output_xlsx_file_name)
     output_xlsx_file_name <- paste0(output_xlsx_file_name,"_",names(rcm_by_country),".xlsx")
 
@@ -75,14 +76,14 @@ rcm_prefill_research_tracker<-function(output_xlsx_file_name = paste0("tracker_"
   options(xlsx.dat.format = "yyyy-dd-MMM")
   # get tracker template:
   tracker <- list.files(base::system.file(package = "researchcyclematrix"),full.names = T) %>%
-    grep("Research tracker - template - V4.xlsx", ., value = TRUE) %>%
+    grep("Research tracker - template - V5.xlsx", ., value = TRUE) %>%
     (xlsx::loadWorkbook)
 
   tracker_sheets<-xlsx::getSheets(tracker)
 
 
   xlsx::addDataFrame(x = tracker_rows %>% as.data.frame(stringsAsFactors=FALSE),
-                     sheet = tracker_sheets[[3]],
+                     sheet = tracker_sheets[[2]],
                      startRow = 5,
                      startColumn = 1,
                      row.names = FALSE,col.names = FALSE)
@@ -118,12 +119,13 @@ rcm_prefill_research_tracker_create_rows<-function(rcm = NULL){
 
 
   issues <-issues %>%
-    filter(grepl("planned submission passed|none of the hq submission dates", issue))
+    filter(grepl("planned submission passed|none of the hq submission dates|with field for more", issue))
   issues$request<-issues$issue %>% as.character()
 
   issues$request[grepl("none of the hq submission dates", issues$issue)]<-"Missing estimated date of submission to HQ, please add in \"Date to HQ\" column"
 
   issues$request[grepl("planned submission passed", issues$issue)]<-"Estimated date of submission to HQ has passed, please add new estimated date in \"Date to HQ\" column and briefly explain delay in CFP comments"
+  issues$request[grepl("with field for more", issues$issue)]<-"with field for more than a month, any status update?"
 
 
   rcm$`HQ Update Request`<- issues[match(rcm$file.id,issues$`file id`),"request"]
